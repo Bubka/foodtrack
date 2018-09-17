@@ -30,7 +30,7 @@ class FoodRequest extends FormRequest
             'carb' => 'required|numeric',
             'lipid' => 'required|numeric',
             'baseWeight' => 'required|numeric',
-            'unitWeight' => 'required|numeric',
+            // 'unitWeight' => 'numeric',
         ];
     }
 }

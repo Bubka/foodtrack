@@ -18,6 +18,7 @@ Route::get('/', function () {
 // Route::get('food', 'FoodController@index')->name('food.index');
 // Route::get('food/{id}', 'FoodController@show')->name('food.show');
 
+Route::get('food/feed', 'FoodController@feed');
 Route::resource('food', 'FoodController');
 
 // Route::get('intake', 'IntakeController@index')->name('intake.index');

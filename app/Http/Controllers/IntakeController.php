@@ -134,7 +134,11 @@ class IntakeController extends Controller
 
         if( $request->number > 0)
         {
-            $ateWeight = $request->number * $food->unitWeight;
+            if( !isset($food->unitWeight))
+            {
+                return back()->with('error', 'This food does not have unit weight');
+            }
+            else $ateWeight = $request->number * $food->unitWeight;
         }
         else
         {
@@ -241,11 +245,11 @@ class IntakeController extends Controller
     {
         return [
             'breakfast' => '08h',
-            'morningSnack' => '10h',
+            'morningsnack' => '10h',
             'lunch' => '12h',
-            'afternoonSnack' => '16h',
+            'afternoonsnack' => '16h',
             'diner' => '19h',
-            'eveningSnack' => '22h'
+            'eveningsnack' => '22h'
         ];
     }
 

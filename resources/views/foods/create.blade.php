@@ -48,7 +48,7 @@
     <div class="row">
         <div class="form-group col-md-4">
             <label for="unitWeight">Unit weight</label>
-            <input type="text" class="form-control" name="unitWeight" required>
+            <input type="text" class="form-control" name="unitWeight" >
         </div>
     </div>
     <div class="row justify-content-center">

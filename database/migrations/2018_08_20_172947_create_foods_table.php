@@ -21,7 +21,7 @@ class CreateFoodsTable extends Migration
             $table->integer('carb')->nullable($value = false)->unsigned();
             $table->integer('lipid')->nullable($value = false)->unsigned();
             $table->integer('baseWeight')->nullable($value = false)->unsigned()->default('100');
-            $table->integer('unitWeight')->unsigned();
+            $table->integer('unitWeight')->nullable()->unsigned();
             $table->timestamps();
         });
     }

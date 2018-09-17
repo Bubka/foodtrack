@@ -16,7 +16,9 @@
     <tr>
       <td>
         <a href="{{action('FoodController@show', $food->id)}}">{{ $food->name }}</a>
-        <span class="text-muted">({{ $food['unitWeight'] }} gr)</span>
+        @isset($food['unitWeight'])
+          <span class="text-muted">({{ $food['unitWeight'] }} gr)</span>
+        @endisset
         <span style="display: block;">
           {{ $food['kcal'] }} kcal&#64;{{ $food['baseWeight'] }} gr ::
           {{ $food['protein'] }} ·
