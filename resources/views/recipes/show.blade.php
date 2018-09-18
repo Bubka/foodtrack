@@ -6,6 +6,7 @@
         {{ $recipe->name }}
         {{-- <a class="btn btn-sm btn-primary" href="{{action('RecipeController@refresh', $recipe->id)}}" >Refresh</a> --}}
     </h2>
+    @if ( count($recipe->foods) > 0 )
     <h4>
         <span class="badge badge-primary">
             <b>{{ $recipe->kcal }} kcal</b>
@@ -14,17 +15,18 @@
         {{ $recipe->carb }}
         {{ $recipe->lipid }}
     </h4>
+    @endif
     <br />
 
     @include('partials.form_error')
     @include('partials.alert_success')
 
+    <h4>Ingredients
+        <a data-toggle="modal" data-target="#modalNewIngredient" >
+            <i class="fas fa-plus-square fa-fw"></i>
+        </a>
+    </h4>
     @if ( count($recipe->foods) > 0 )
-        <h4>Ingredients
-            <a data-toggle="modal" data-target="#modalNewIngredient" >
-                <i class="fas fa-plus-square fa-fw"></i>
-            </a>
-        </h4>
         <table class="table table-striped">
             <tbody>
                 @foreach ($recipe->foods as $food)
@@ -58,6 +60,8 @@
                 @endforeach
             </tbody>
         </table>
+    @else
+        <div class="text-secondary">no ingredient yet</div>
     @endif
     <br />
     <div class="mt-3 row justify-content-center">
