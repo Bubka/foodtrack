@@ -50,7 +50,7 @@
     <br />
 
     <h3>Breakfast
-        <a data-toggle="modal" data-target="#modalNewIntake" data-whatever="breakfast">
+        <a class="text-body" href="#modalNewIntake" data-toggle="modal" data-target="#modalNewIntake" data-whatever="breakfast">
             <i class="fas fa-plus-square fa-sm fa-fw"></i>
         </a>
     @if (count($breakfastIntakes) > 0)
@@ -61,7 +61,7 @@
     @endif
 
     <h3>Morning Snack
-        <a data-toggle="modal" data-target="#modalNewIntake" data-whatever="morningsnack">
+        <a class="text-body" href="#modalNewIntake" data-toggle="modal" data-target="#modalNewIntake" data-whatever="morningsnack">
             <i class="fas fa-plus-square fa-sm fa-fw"></i>
         </a>
     @if (count($morningSnackIntakes) > 0)
@@ -72,7 +72,7 @@
     @endif
 
     <h3>Lunch
-        <a data-toggle="modal" data-target="#modalNewIntake" data-whatever="lunch">
+        <a class="text-body" href="#modalNewIntake" data-toggle="modal" data-target="#modalNewIntake" data-whatever="lunch">
             <i class="fas fa-plus-square fa-sm fa-fw"></i>
         </a>
     @if (count($lunchIntakes) > 0)
@@ -83,7 +83,7 @@
     @endif
 
     <h3>Afternoon Snack
-        <a data-toggle="modal" data-target="#modalNewIntake" data-whatever="afternoonsnack">
+        <a class="text-body" href="#modalNewIntake" data-toggle="modal" data-target="#modalNewIntake" data-whatever="afternoonsnack">
             <i class="fas fa-plus-square fa-sm fa-fw"></i>
         </a>
     @if (count($afternoonsnackIntakes) > 0)
@@ -94,7 +94,7 @@
     @endif
 
     <h3>Diner
-        <a data-toggle="modal" data-target="#modalNewIntake" data-whatever="diner">
+        <a class="text-body" href="#modalNewIntake" data-toggle="modal" data-target="#modalNewIntake" data-whatever="diner">
             <i class="fas fa-plus-square fa-sm fa-fw"></i>
         </a>
     @if (count($dinerIntakes) > 0)
@@ -105,7 +105,7 @@
     @endif
 
     <h3>Evening Snack
-        <a data-toggle="modal" data-target="#modalNewIntake" data-whatever="eveningsnack">
+        <a class="text-body" href="#modalNewIntake" data-toggle="modal" data-target="#modalNewIntake" data-whatever="eveningsnack">
             <i class="fas fa-plus-square fa-sm fa-fw"></i>
         </a>
     @if (count($eveningSnackIntakes) > 0)

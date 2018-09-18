@@ -16,8 +16,8 @@
         .twitter-typeahead,
         .tt-hint,
         .tt-input,
-        .tt-menu{
-            /*width: auto ! important;*/
+        .tt-menu {
+            width: 100% !important;
             /*font-weight: normal;*/
         }
 

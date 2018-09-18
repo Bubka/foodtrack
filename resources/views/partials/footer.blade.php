@@ -9,7 +9,7 @@
     }
 
     .appnav a {
-      border-right: 1px solid #000;
+      border-right: 1px solid #777;
       text-align: center;
       color: white;
       line-height: 60px;
@@ -22,10 +22,12 @@
 </style>
 
 <footer>
-    <div class="row appnav">
-        <a class="col-3" href="{{ route('intake.daily') }}">Daily</a>
-        <a class="col-3" href="{{ route('food.index') }}">Foods</a>
-        <a class="col-3" href="{{ route('intake.index') }}">Intakes</a>
-        <a class="col-3" href="{{ route('recipe.index') }}">Recipes</a>
+    <div class="container">
+        <div class="row appnav">
+            <a class="col-3" href="{{ route('intake.daily') }}">Daily</a>
+            <a class="col-3" href="{{ route('food.index') }}">Foods</a>
+            <a class="col-3" href="{{ route('intake.index') }}">Intakes</a>
+            <a class="col-3" href="{{ route('recipe.index') }}">Recipes</a>
+        </div>
     </div>
 </footer>

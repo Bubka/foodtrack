@@ -10,10 +10,12 @@
     <form method="post" action="{{url('recipe')}}">
         {{ csrf_field() }}
         <div class="form-group">
-            <label for="name" class="col-form-label-lg">Name</label>
-            <input type="text" class="form-control form-control-lg" name="name" required>
+            <label for="name">Name</label>
+            <input type="text" class="form-control" name="name" required>
         </div>
-        <button type="submit" class="btn btn-primary btn-lg float-right">Create Recipe</button>
+        <div class="col-8 mx-auto pt-4" style="text-align: center;">
+            <button type="submit" class="btn btn-primary btn-block">Create Recipe</button>
+        </div>
     </form>
 
     @include('partials.suggest_script')

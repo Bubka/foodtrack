@@ -22,7 +22,7 @@
     @include('partials.alert_success')
 
     <h4>Ingredients
-        <a href="#modalNewIngredient" data-toggle="modal" data-target="#modalNewIngredient" >
+        <a class="text-body" href="#modalNewIngredient" data-toggle="modal" data-target="#modalNewIngredient" >
             <i class="fas fa-plus-square fa-fw"></i>
         </a>
     </h4>

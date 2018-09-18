@@ -16,10 +16,11 @@
         "cross-env": "^5.1",
         "jquery": "^3.2",
         "laravel-mix": "^2.0",
-        "lodash": "^4.17.4",
-        "typeahead.js": "^0.11.1"
+        "lodash": "^4.17.4"
     },
     "dependencies": {
-        "@fortawesome/fontawesome-free": "^5.3.1"
+        "@fortawesome/fontawesome-free": "^5.3.1",
+        "js-datepicker": "^3.3.2",
+        "typeahead.js": "^0.11.1"
     }
 }
