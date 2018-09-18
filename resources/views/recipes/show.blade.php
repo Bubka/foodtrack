@@ -105,7 +105,7 @@
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label for="weight">Weight</label>
-                            <input type="text" class="form-control" name="weight">
+                            <input type="text" class="form-control" name="weight" pattern="[0-9]*">
                         </div>
                     </div>
             
