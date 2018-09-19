@@ -139,7 +139,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <ul class="nav nav-tabs" id="myTab" role="tablist">
+                <ul class="nav nav-pills nav-fill" id="myTab" role="tablist">
                     <li class="nav-item">
                         <a class="nav-link active" id="food-tab" data-toggle="tab" href="#foodTab" role="tab" aria-controls="food" aria-selected="true">Food</a>
                     </li>
@@ -160,7 +160,19 @@
                             <input type="text" class="form-control" name="food" id="food" autocomplete="off" required>
                             <input type="hidden" name="suggestedId" id="suggestedId" value="" />
                         </div>
-                        <div class="form-group">
+
+                        <div class="form-row">
+                            <div class="form-group col-6">
+                                <label for="">Quantity</label>
+                                <input type="text" class="form-control" name="weight" placeholder="weight" pattern="[0-9]*">
+                            </div>
+                            <div class="form-group col-6">
+                                <label for="">&nbsp;</label>
+                                <input type="text" class="form-control" name="number" placeholder="number" >
+                            </div>
+                        </div>
+
+                        {{-- <div class="form-group">
                             <div class="input-group">
                                 <div class="input-group-prepend">
                                     <span class="input-group-text">
@@ -179,7 +191,7 @@
                                 </div>
                                 <input type="text" name="number" aria-label="Number" class="form-control">
                             </div>
-                        </div>
+                        </div> --}}
                     </form>    
                 </div>
                 <div class="tab-pane fade" id="recipeTab" role="tabpanel" aria-labelledby="recipe-tab">

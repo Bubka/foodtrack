@@ -25,11 +25,9 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="form-group col-md-4">
+        <div class="form-group">
             <label for="ate_on">Ate on</label>
             <input type="text" class="form-control" name="ate_on" value="{{$intake->ate_on}}">
-            </div>
         </div>
 
         <div class="row">
@@ -45,24 +43,19 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="form-group col-md-4">
-                <label for="weight">Weight</label>
-                <input type="text" class="form-control" name="weight" value="{{$intake->weight}}">
+        <div class="form-row">
+            <div class="form-group col-6">
+                <label for="">Quantity</label>
+                <input type="text" class="form-control" name="weight"  value="{{$intake->weight}}" placeholder="weight" pattern="[0-9]*">
+            </div>
+            <div class="form-group col-6">
+                <label for="">&nbsp;</label>
+                <input type="text" class="form-control" name="number" value="{{$intake->number}}" placeholder="unit">
             </div>
         </div>
-
-        <div class="row">
-            <div class="form-group col-md-4">
-                <label for="number">Quantity</label>
-                <input type="text" class="form-control" name="number" value="{{$intake->number}}">
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="form-group col-md-4">
-            <button type="submit" class="btn btn-success">Update Intake</button>
-            </div>
+        
+        <div class="col-8 mx-auto pt-4" style="text-align: center;">
+            <button type="submit" class="btn btn-primary btn-block">Update Intake</button>
         </div>
     </form>
 

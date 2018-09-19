@@ -17,31 +17,31 @@
         </div>
         <div class="form-group col-3">
             <label for="">kcal</label>
-            <input type="text" class="form-control" name="kcal" required>
+            <input type="text" class="form-control" name="kcal" pattern="[0-9]*" required>
         </div>
     </div>
     <div class="form-row">
         <div class="form-group col-4">
             <label for="">Nutrients</label>
-            <input type="text" class="form-control" name="protein" placeholder="proteins" required>
+            <input type="text" class="form-control" name="protein" placeholder="proteins" pattern="[0-9]*" required>
         </div>
         <div class="form-group col-4">
             <label for="">&nbsp;</label>
-            <input type="text" class="form-control" name="carb" placeholder="carbs" required>
+            <input type="text" class="form-control" name="carb" placeholder="carbs" pattern="[0-9]*" required>
         </div>
         <div class="form-group col-4">
             <label for="">&nbsp;</label>
-            <input type="text" class="form-control" name="lipid" placeholder="lipids" required>
+            <input type="text" class="form-control" name="lipid" placeholder="lipids" pattern="[0-9]*" required>
         </div>
     </div>
     <div class="form-row">
         <div class="form-group col-6">
             <label for="">Weight</label>
-            <input type="text" class="form-control" name="baseWeight" value="100" placeholder="base" required>
+            <input type="text" class="form-control" name="baseWeight" value="100" placeholder="base" pattern="[0-9]*" required>
         </div>
         <div class="form-group col-6">
             <label for="">&nbsp;</label>
-            <input type="text" class="form-control" name="unitWeight" placeholder="unit" >
+            <input type="text" class="form-control" name="unitWeight" placeholder="unit" pattern="[0-9]*" >
         </div>
     </div>
     <div class="col-8 mx-auto pt-4" style="text-align: center;">

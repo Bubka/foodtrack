@@ -66,10 +66,10 @@
     <br />
     <div class="mt-3 row justify-content-center">
         <div class="col-5">
-            <a href="{{ action('FoodController@edit', $recipe->id)}}" class="btn btn-block btn-sm btn-outline-secondary">Edit</a>
+            <a href="{{ action('RecipeController@edit', $recipe->id)}}" class="btn btn-block btn-sm btn-outline-secondary">Edit</a>
         </div>
         <div class="col-5">
-            <form action="{{action('FoodController@destroy', $recipe->id)}}" method="post">
+            <form action="{{action('RecipeController@destroy', $recipe->id)}}" method="post">
                 {{csrf_field()}}
                 <input name="_method" type="hidden" value="DELETE">
                 <button class="btn btn-block btn-sm btn-outline-secondary" type="submit">Delete</button>
@@ -101,18 +101,14 @@
                             <input type="hidden" name="suggestedId" id="suggestedId" value="" />
                         </div>
                     </div>
-            
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <label for="weight">Weight</label>
-                            <input type="text" class="form-control" name="weight" pattern="[0-9]*">
+                    <div class="form-row">
+                        <div class="form-group col-6">
+                            <label for="">Quantity</label>
+                            <input type="text" class="form-control" name="weight" placeholder="weight" pattern="[0-9]*">
                         </div>
-                    </div>
-            
-                    <div class="row">
-                        <div class="form-group col-md-6">
-                            <label for="number">Quantity</label>
-                            <input type="text" class="form-control" name="number">
+                        <div class="form-group col-6">
+                            <label for="">&nbsp;</label>
+                            <input type="text" class="form-control" name="number" placeholder="unit">
                         </div>
                     </div>
                 </form>

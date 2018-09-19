@@ -37,7 +37,7 @@
         <div class="form-row">
             <div class="form-group col-6">
                 <label for="">Quantity</label>
-                <input type="text" class="form-control" name="weight" placeholder="weight">
+                <input type="text" class="form-control" name="weight" placeholder="weight" pattern="[0-9]*">
             </div>
             <div class="form-group col-6">
                 <label for="">&nbsp;</label>

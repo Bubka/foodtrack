@@ -238,7 +238,7 @@ class IntakeController extends Controller
         $intake = Intake::findOrFail($id);
         $intake->delete();
 
-        return redirect('intake')->with('success', 'Intake has been deleted');
+        return back()->with('success', 'Intake has been deleted');
     }
 
     protected function meals()
