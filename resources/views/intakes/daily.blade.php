@@ -36,17 +36,6 @@
 
     @include('partials.alert_success')
 
-    {{-- <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalNewIntake" data-whatever="breakfast">
-            
-        </button>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalNewIntake" data-whatever="lunch">
-            Lunch
-        </button>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalNewIntake" data-whatever="diner">
-            Diner
-        </button>
-    </div> --}}
     <br />
 
     <h3>Breakfast
@@ -114,19 +103,6 @@
     @else
         </h3><div class="mb-4 text-secondary">no intake here</div>
     @endif
-
-
-    {{-- <div class="btn-group" role="group" aria-label="Basic example">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalNewIntake" data-whatever="morningsnack">
-            Morning
-        </button>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalNewIntake" data-whatever="afternoonSnack">
-            Afternoon
-        </button>
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#modalNewIntake" data-whatever="eveningsnack">
-            Evening
-        </button>
-    </div> --}}
 
     {{-- modal form --}}
     <div class="modal fade" id="modalNewIntake" tabindex="-1" role="dialog" aria-hidden="true">

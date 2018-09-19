@@ -30,7 +30,7 @@
         <tr>
             <td colspan="2">
                 <span class="text-monospace text-muted float-right">
-                    {{ $intake->sum('protein') }} - {{ $intake->sum('carb') }} - {{ $intake->sum('lipid') }}
+                    {{ $intakes->sum('protein') }} - {{ $intakes->sum('carb') }} - {{ $intakes->sum('lipid') }}
                 </span>
             </td>
         </tr>
