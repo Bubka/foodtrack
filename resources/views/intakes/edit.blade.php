@@ -9,6 +9,7 @@
     <form method="post" action="{{action('IntakeController@update', $id)}}">
         {{csrf_field()}}
         <input name="_method" type="hidden" value="PATCH">
+        <input type="hidden" name="meal" value="{{ $intake->meal }}" />
         <div class="row">
             <div class="form-group col-md-4">
                 <label for="food_id">Food</label>

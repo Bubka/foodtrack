@@ -51,6 +51,48 @@ class IntakeController extends Controller
         $dailyStat['protein'] = round($intakes->sum('protein') * 100 / $objective['protein']);
         $dailyStat['lipid'] = round($intakes->sum('lipid') * 100 / $objective['lipid']);
 
+        switch($dailyStat['kcal'])
+        {
+            case ($intakes->sum('kcal') < $objective['kcal'] * 0.5 ):
+                $progressColor['kcal'] = 'bg-danger';
+            break;
+        
+            case ($intakes->sum('kcal') < $objective['kcal'] * 0.9 ):
+                $progressColor['kcal'] = 'bg-warning';
+            break;
+        
+            default:
+                $progressColor['kcal'] = 'bg-success';
+        }
+
+        switch($dailyStat['protein'])
+        {
+            case ($intakes->sum('protein') < $objective['protein'] * 0.5 ):
+                $progressColor['protein'] = 'bg-danger';
+            break;
+        
+            case ($intakes->sum('protein') < $objective['protein'] * 0.9 ):
+                $progressColor['protein'] = 'bg-warning';
+            break;
+        
+            default:
+                $progressColor['protein'] = 'bg-success';
+        }
+
+        switch($dailyStat['lipid'])
+        {
+            case ($intakes->sum('lipid') < $objective['lipid'] * 0.5 ):
+                $progressColor['lipid'] = 'bg-danger';
+            break;
+        
+            case ($intakes->sum('lipid') < $objective['lipid'] * 0.9 ):
+                $progressColor['lipid'] = 'bg-warning';
+            break;
+        
+            default:
+                $progressColor['lipid'] = 'bg-success';
+        }
+
         $breakfastIntakes = $intakes->where('meal', 'breakfast');
         $morningSnackIntakes = $intakes->where('meal', 'morningsnack');
         $lunchIntakes = $intakes->where('meal', 'lunch');
@@ -60,6 +102,7 @@ class IntakeController extends Controller
 
         return view('intakes.daily', [  'intakes' => $intakes,
                                         'dailyStat' => $dailyStat,
+                                        'progressColor' => $progressColor,
                                         'breakfastIntakes' => $breakfastIntakes,
                                         'morningSnackIntakes' => $morningSnackIntakes,
                                         'lunchIntakes' => $lunchIntakes,
@@ -224,7 +267,7 @@ class IntakeController extends Controller
         
         $intake->save();
 
-        return redirect('intake')->with('success', $intake->meal . "on" . $intake->ate_on . ' has been updated');
+        return back()->with('success', $intake->meal . "on" . $intake->ate_on . ' has been updated');
     }
 
     /**

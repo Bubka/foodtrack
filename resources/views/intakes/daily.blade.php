@@ -1,10 +1,10 @@
 @extends('masterpage')
 
 @section('content')
-    <h1 class="mb-3">Daily intakes</h1>
+    <h1 class="mb-4">Daily intakes</h1>
     <h6>Energy: <span class="text-monospace">{{ $intakes->sum('kcal') }}kcal</span></h6>
     <div class="progress mb-3" style="height: 6px;">
-        <div class="progress-bar" 
+        <div class="progress-bar {{ $progressColor['kcal'] }}" 
             role="progressbar"
             style="width: {{ $dailyStat['kcal'] }}%;" 
             aria-valuenow="{{ $dailyStat['kcal'] }}" 
@@ -14,7 +14,7 @@
     </div>
     <h6>Proteins: <span class="text-monospace">{{ $intakes->sum('protein') }}gr</span></h6>
     <div class="progress mb-3" style="height: 6px;">
-        <div class="progress-bar" 
+        <div class="progress-bar {{ $progressColor['protein'] }}" 
             role="progressbar"
             style="width: {{ $dailyStat['protein'] }}%;" 
             aria-valuenow="{{ $dailyStat['protein'] }}" 
@@ -24,7 +24,7 @@
     </div>
     <h6>Lipids: <span class="text-monospace">{{ $intakes->sum('lipid') }}gr</span></h6>
     <div class="progress mb-3" style="height: 6px;">
-        <div class="progress-bar" 
+        <div class="progress-bar {{ $progressColor['lipid'] }}" 
             role="progressbar"
             style="width: {{ $dailyStat['lipid'] }}%;" 
             aria-valuenow="{{ $dailyStat['lipid'] }}" 
@@ -146,27 +146,6 @@
                                 <input type="text" class="form-control" name="number" placeholder="number" >
                             </div>
                         </div>
-
-                        {{-- <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                        <i class="fas fa-weight-hanging"></i>
-                                    </span>
-                                </div>
-                                <input type="text" name="weight" aria-label="Weight" class="form-control">
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <div class="input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text">
-                                        <i class="fas fa-times"></i>
-                                    </span>
-                                </div>
-                                <input type="text" name="number" aria-label="Number" class="form-control">
-                            </div>
-                        </div> --}}
                     </form>    
                 </div>
                 <div class="tab-pane fade" id="recipeTab" role="tabpanel" aria-labelledby="recipe-tab">
