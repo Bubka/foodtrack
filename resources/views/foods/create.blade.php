@@ -23,15 +23,15 @@
     <div class="form-row">
         <div class="form-group col-4">
             <label for="">Nutrients</label>
-            <input type="text" class="form-control" name="protein" placeholder="proteins" pattern="[0-9]*" required>
+            <input type="text" class="form-control" name="protein" placeholder="proteins" required>
         </div>
         <div class="form-group col-4">
             <label for="">&nbsp;</label>
-            <input type="text" class="form-control" name="carb" placeholder="carbs" pattern="[0-9]*" required>
+            <input type="text" class="form-control" name="carb" placeholder="carbs" required>
         </div>
         <div class="form-group col-4">
             <label for="">&nbsp;</label>
-            <input type="text" class="form-control" name="lipid" placeholder="lipids" pattern="[0-9]*" required>
+            <input type="text" class="form-control" name="lipid" placeholder="lipids" required>
         </div>
     </div>
     <div class="form-row">
