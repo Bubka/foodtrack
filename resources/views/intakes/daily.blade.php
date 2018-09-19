@@ -1,8 +1,7 @@
 @extends('masterpage')
 
 @section('content')
-    <h1>Daily intakes
-    </h1>
+    <h1 class="mb-3">Daily intakes</h1>
     <h6>Energy: <span class="text-monospace">{{ $intakes->sum('kcal') }}kcal</span></h6>
     <div class="progress mb-3" style="height: 6px;">
         <div class="progress-bar" 
