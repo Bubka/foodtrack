@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Food;
+use App\Recipe;
 use App\Http\Requests\FoodRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -36,7 +37,7 @@ class FoodController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function store(FoodRequest $request)
-    {        
+    {
         Food::create($request->all());
 
         // return back()->with('success', 'Food has been added');
@@ -92,7 +93,28 @@ class FoodController extends Controller
      */
     public function destroy($id)
     {
-        $food = Food::findOrFail($id);
+        $food = Food::withCount('recipes', 'intakes')->findOrFail($id);
+
+        // $recipes = Recipe::whereHas('foods', function ($query) {
+        //     $query->where('id', '=', $food->id);
+        // })->get();
+
+
+
+        if( $food->recipes_count > 0 ) {
+            foreach($food->recipes as $recipe)
+            {
+                $recipe->foods()->detach($food->id);
+            }
+        }
+
+        if( $food->intakes_count > 0 ) {
+            foreach($food->intakes as $intake)
+            {
+                $intake->delete();
+            }
+        }
+
         $food->delete();
 
         return redirect('food')->with('success','The food has been deleted');
