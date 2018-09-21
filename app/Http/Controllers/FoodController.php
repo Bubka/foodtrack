@@ -95,12 +95,6 @@ class FoodController extends Controller
     {
         $food = Food::withCount('recipes', 'intakes')->findOrFail($id);
 
-        // $recipes = Recipe::whereHas('foods', function ($query) {
-        //     $query->where('id', '=', $food->id);
-        // })->get();
-
-
-
         if( $food->recipes_count > 0 ) {
             foreach($food->recipes as $recipe)
             {

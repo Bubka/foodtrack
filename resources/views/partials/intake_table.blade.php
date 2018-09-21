@@ -3,7 +3,7 @@
         @foreach ($intakes as $intake)
         <tr>
             <td>
-                <a href="{{action('FoodController@show', $intake->food->id)}}" >{{ $intake->food->name }}</a>
+                <a href="{{action('IntakeController@show', $intake->id)}}" >{{ $intake->food->name }}</a>
                 <span class="">-
                     @isset($intake->weight)
                     {{ $intake['weight'] }}gr

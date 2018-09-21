@@ -2,17 +2,11 @@
 
 @section('content')
 
-    {{-- <ul>
-        <li>id = {{ $intake->id }}</li>
-        <li>intake date = {{ $intake->ate_on }}</li>
-        <li>intake meal = {{ $intake->meal }}</li>
-        @if ($intake->food)
-        <li>food = <a href="{{ route('food.show', ['id' => $intake->food->id]) }}" >{{ $intake->food->name }}</a></li>
-        @endif
-    </ul> --}}
-
-    <h2 class="text-capitalize">{{ $intake->meal }} on {{ $intake->ate_on }} : <a href="{{ route('food.show', ['id' => $intake->food->id]) }}" >{{ $intake->food->name }}</a></h2>
+    <h2 class="text-capitalize mb-4">{{ $intake->meal }} on {{ $intake->ate_on }}</h2>
     <ul class="list-group list-group-flush">
+        <li class="list-group-item">
+            <a href="{{ route('food.show', ['id' => $intake->food->id]) }}" >{{ $intake->food->name }}</a>
+        </li>
         <li class="list-group-item d-flex justify-content-between align-items-center">kcal
             <span class="badge badge-dark badge-pill">{{ $intake->kcal }}</span>
         </li>

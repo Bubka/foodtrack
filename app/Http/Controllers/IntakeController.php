@@ -267,7 +267,7 @@ class IntakeController extends Controller
         
         $intake->save();
 
-        return back()->with('success', $intake->meal . "on" . $intake->ate_on . ' has been updated');
+        return redirect('intake')->with('success', $intake->meal . "on" . $intake->ate_on . ' has been updated');
     }
 
     /**
