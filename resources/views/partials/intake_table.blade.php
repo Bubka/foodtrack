@@ -24,7 +24,7 @@
                 </form>
             </td>
         </tr>
-        @endforeach    
+        @endforeach
     </tbody>
     <tfoot>
         <tr>
@@ -32,6 +32,7 @@
                 <span class="text-monospace text-muted float-right">
                     {{ $intakes->sum('protein') }} - {{ $intakes->sum('carb') }} - {{ $intakes->sum('lipid') }}
                 </span>
+                <a name="{{ $meal }}"></a>
             </td>
         </tr>
     </tfoot>

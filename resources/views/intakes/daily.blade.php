@@ -2,33 +2,34 @@
 
 @section('content')
     <h1 class="mb-4">Daily intakes</h1>
+    <a name="breakfast"></a>
     <h6>Energy: <span class="text-monospace">{{ $intakes->sum('kcal') }}kcal</span></h6>
     <div class="progress mb-3" style="height: 6px;">
-        <div class="progress-bar {{ $progressColor['kcal'] }}" 
+        <div class="progress-bar {{ $progressColor['kcal'] }}"
             role="progressbar"
-            style="width: {{ $dailyStat['kcal'] }}%;" 
-            aria-valuenow="{{ $dailyStat['kcal'] }}" 
-            aria-valuemin="0" 
+            style="width: {{ $dailyStat['kcal'] }}%;"
+            aria-valuenow="{{ $dailyStat['kcal'] }}"
+            aria-valuemin="0"
             aria-valuemax="100">
         </div>
     </div>
     <h6>Proteins: <span class="text-monospace">{{ $intakes->sum('protein') }}gr</span></h6>
     <div class="progress mb-3" style="height: 6px;">
-        <div class="progress-bar {{ $progressColor['protein'] }}" 
+        <div class="progress-bar {{ $progressColor['protein'] }}"
             role="progressbar"
-            style="width: {{ $dailyStat['protein'] }}%;" 
-            aria-valuenow="{{ $dailyStat['protein'] }}" 
-            aria-valuemin="0" 
+            style="width: {{ $dailyStat['protein'] }}%;"
+            aria-valuenow="{{ $dailyStat['protein'] }}"
+            aria-valuemin="0"
             aria-valuemax="100">
         </div>
     </div>
     <h6>Lipids: <span class="text-monospace">{{ $intakes->sum('lipid') }}gr</span></h6>
     <div class="progress mb-3" style="height: 6px;">
-        <div class="progress-bar {{ $progressColor['lipid'] }}" 
+        <div class="progress-bar {{ $progressColor['lipid'] }}"
             role="progressbar"
-            style="width: {{ $dailyStat['lipid'] }}%;" 
-            aria-valuenow="{{ $dailyStat['lipid'] }}" 
-            aria-valuemin="0" 
+            style="width: {{ $dailyStat['lipid'] }}%;"
+            aria-valuenow="{{ $dailyStat['lipid'] }}"
+            aria-valuemin="0"
             aria-valuemax="100">
         </div>
     </div>
@@ -43,9 +44,11 @@
         </a>
     @if (count($breakfastIntakes) > 0)
         <small class="float-right">{{ $breakfastIntakes->sum('kcal') }} kcal</small></h3>
-        @include('partials.intake_table', array('intakes' => $breakfastIntakes))
+        @include('partials.intake_table', array('intakes' => $breakfastIntakes, 'meal' => 'morningsnack'))
     @else
-        </h3><div class="mb-4 text-secondary">no intake here</div>
+        </h3>
+        <a name="morningsnack"></a>
+        <div class="mb-4 text-secondary">no intake here</div>
     @endif
 
     <h3>Morning Snack
@@ -54,9 +57,11 @@
         </a>
     @if (count($morningSnackIntakes) > 0)
         <small class="float-right">{{ $morningSnackIntakes->sum('kcal') }} kcal</small></h3>
-        @include('partials.intake_table', array('intakes' => $morningSnackIntakes))
+        @include('partials.intake_table', array('intakes' => $morningSnackIntakes, 'meal' => 'lunch'))
     @else
-        </h3><div class="mb-4 text-secondary">no intake here</div>
+        </h3>
+        <a name="lunch"></a>
+        <div class="mb-4 text-secondary">no intake here</div>
     @endif
 
     <h3>Lunch
@@ -65,9 +70,11 @@
         </a>
     @if (count($lunchIntakes) > 0)
         <small class="float-right">{{ $lunchIntakes->sum('kcal') }} kcal</small></h3>
-        @include('partials.intake_table', array('intakes' => $lunchIntakes))
+        @include('partials.intake_table', array('intakes' => $lunchIntakes, 'meal' => 'afternoonsnack'))
     @else
-        </h3><div class="mb-4 text-secondary">no intake here</div>
+        </h3>
+        <a name="afternoonsnack"></a>
+        <div class="mb-4 text-secondary">no intake here</div>
     @endif
 
     <h3>Afternoon Snack
@@ -76,9 +83,11 @@
         </a>
     @if (count($afternoonsnackIntakes) > 0)
         <small class="float-right">{{ $afternoonsnackIntakes->sum('kcal') }} kcal</small></h3>
-        @include('partials.intake_table', array('intakes' => $afternoonsnackIntakes))
+        @include('partials.intake_table', array('intakes' => $afternoonsnackIntakes, 'meal' => 'diner'))
     @else
-        </h3><div class="mb-4 text-secondary">no intake here</div>
+        </h3>
+        <a name="diner"></a>
+        <div class="mb-4 text-secondary">no intake here</div>
     @endif
 
     <h3>Diner
@@ -87,9 +96,11 @@
         </a>
     @if (count($dinerIntakes) > 0)
         <small class="float-right">{{ $dinerIntakes->sum('kcal') }} kcal</small></h3>
-        @include('partials.intake_table', array('intakes' => $dinerIntakes))
+        @include('partials.intake_table', array('intakes' => $dinerIntakes, 'meal' => 'eveningsnack'))
     @else
-        </h3><div class="mb-4 text-secondary">no intake here</div>
+        </h3>
+        <a name="eveningsnack"></a>
+        <div class="mb-4 text-secondary">no intake here</div>
     @endif
 
     <h3>Evening Snack
@@ -98,7 +109,7 @@
         </a>
     @if (count($eveningSnackIntakes) > 0)
         <small class="float-right">{{ $eveningSnackIntakes->sum('kcal') }} kcal</small></h3>
-        @include('partials.intake_table', array('intakes' => $eveningSnackIntakes))
+        @include('partials.intake_table', array('intakes' => $eveningSnackIntakes, 'meal' => 'eveningsnack'))
     @else
         </h3><div class="mb-4 text-secondary">no intake here</div>
     @endif
@@ -146,7 +157,7 @@
                                 <input type="text" class="form-control" name="number" placeholder="number" >
                             </div>
                         </div>
-                    </form>    
+                    </form>
                 </div>
                 <div class="tab-pane fade" id="recipeTab" role="tabpanel" aria-labelledby="recipe-tab">
                     <br />
@@ -160,7 +171,7 @@
                             <input type="text" class="form-control" name="recipe" id="recipe" autocomplete="off" required>
                             <input type="hidden" name="recipeSuggestedId" id="recipeSuggestedId" value="" />
                         </div>
-                    </form>  
+                    </form>
                 </div>
                 </div>
             </div>
@@ -193,11 +204,11 @@
                 $('#submitbutton').attr('form', 'addRecipeForm');
                 //e.relatedTarget // previous active tab
             }
-            
+
         })
 
     </script>
 
     @include('partials.suggest_script')
-    
+
 @endsection

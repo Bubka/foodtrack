@@ -56,11 +56,11 @@ class IntakeController extends Controller
             case ($intakes->sum('kcal') < $objective['kcal'] * 0.5 ):
                 $progressColor['kcal'] = 'bg-danger';
             break;
-        
+
             case ($intakes->sum('kcal') < $objective['kcal'] * 0.9 ):
                 $progressColor['kcal'] = 'bg-warning';
             break;
-        
+
             default:
                 $progressColor['kcal'] = 'bg-success';
         }
@@ -70,11 +70,11 @@ class IntakeController extends Controller
             case ($intakes->sum('protein') < $objective['protein'] * 0.5 ):
                 $progressColor['protein'] = 'bg-danger';
             break;
-        
+
             case ($intakes->sum('protein') < $objective['protein'] * 0.9 ):
                 $progressColor['protein'] = 'bg-warning';
             break;
-        
+
             default:
                 $progressColor['protein'] = 'bg-success';
         }
@@ -84,11 +84,11 @@ class IntakeController extends Controller
             case ($intakes->sum('lipid') < $objective['lipid'] * 0.5 ):
                 $progressColor['lipid'] = 'bg-danger';
             break;
-        
+
             case ($intakes->sum('lipid') < $objective['lipid'] * 0.9 ):
                 $progressColor['lipid'] = 'bg-warning';
             break;
-        
+
             default:
                 $progressColor['lipid'] = 'bg-success';
         }
@@ -112,7 +112,7 @@ class IntakeController extends Controller
                                         'intakeDate' => $intakeDate,
                                         'prevDay' => $prevDay,
                                         'nextDay' => $nextDay ]);
-            
+
     }
 
 
@@ -147,7 +147,7 @@ class IntakeController extends Controller
             $intake->lipid = round($usedWeight * ($food->lipid/100), 1);
             $intake->weight = $food->pivot->weight;
             $intake->number = $food->pivot->number;
-   
+
             $intake->save();
         }
 
@@ -202,7 +202,7 @@ class IntakeController extends Controller
 
         $intake->save();
 
-        return back()->with('success', 'Intake has been added');
+        return redirect(url()->previous() . '#' . $request->meal)->with('success', 'Intake has been added');
         //return redirect('intake')->with('success', 'Intake has been added');
     }
 
@@ -230,7 +230,7 @@ class IntakeController extends Controller
         $intake = Intake::findOrFail($id);
         $foods = Food::all();
         $meals = $this->meals();
-        
+
         return view('intakes.edit',compact('intake','id', 'foods', 'meals'));
     }
 
@@ -264,7 +264,7 @@ class IntakeController extends Controller
         $intake->lipid = round($ateWeight * ($food->lipid/100), 1);
         $intake->weight = $request->weight;
         $intake->number = $request->number;
-        
+
         $intake->save();
 
         return redirect('intake')->with('success', $intake->meal . "on" . $intake->ate_on . ' has been updated');
