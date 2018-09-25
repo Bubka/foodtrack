@@ -5,9 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="robots" content="noindex, nofollow">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="no">
     <meta name="apple-mobile-web-app-status-bar-style" content="black">
     <title>Food</title>
+
+    <link rel="shortcut icon" href="{{ asset('favicon.ico') }}" />
+    <link rel="icon" type="image/png" href="{{ asset('favicon.png') }}" />
+    <link rel="apple-touch-icon" href="{{ asset('favicon_lg.png') }}" />
+    <link rel="apple-touch-icon-precomposed" href="{{ asset('favicon_lg.png') }}" />
 
     <link href="{{ asset('css/app.css') }}" media="all" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="{{ asset('js/app.js') }}"></script>
