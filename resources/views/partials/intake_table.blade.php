@@ -9,7 +9,7 @@
                     {{ $intake['weight'] }}gr
                     @endisset
                     @isset($intake['number'])
-                    x{{ $intake['number'] }}
+                    x{{ $intake['number'] }} ({{ $intake->food->unitWeight * $intake['number'] }}gr)
                     @endisset
                 </span>
             </td>

@@ -4,9 +4,18 @@
 
     <h2 class="text-capitalize mb-4">{{ $intake->meal }} on {{ $intake->ate_on }}</h2>
     <ul class="list-group list-group-flush">
-        <li class="list-group-item">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
             <a href="{{ route('food.show', ['id' => $intake->food->id]) }}" >{{ $intake->food->name }}</a>
+            @isset($intake->weight)
+                <span class="badge badge-dark badge-pill">{{ $intake->weight }} gr</span>
+            @endisset
+            @isset($intake->number)
+                <span class="badge badge-dark badge-pill">x{{ $intake->number }} ({{ $intake->food->unitWeight * $intake->number }}gr)</span>
+            @endisset
         </li>
+    </ul>
+    <br />
+    <ul class="list-group list-group-flush">
         <li class="list-group-item d-flex justify-content-between align-items-center">kcal
             <span class="badge badge-dark badge-pill">{{ $intake->kcal }}</span>
         </li>
@@ -18,19 +27,6 @@
         </li>
         <li class="list-group-item d-flex justify-content-between align-items-center">lipids
             <span class="badge badge-dark badge-pill">{{ $intake->lipid }}</span>
-        </li>
-    </ul>
-    <br />
-    <ul class="list-group list-group-flush">
-        <li class="list-group-item d-flex justify-content-between align-items-center">Base weight
-            @isset($intake->weight)
-                <span class="badge badge-dark badge-pill">{{ $intake->weight }} gr</span>
-            @endisset
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">Unit weight
-                @isset($intake->number)
-                    <span class="badge badge-dark badge-pill">x {{ $intake->number }}</span>
-                @endisset
         </li>
     </ul>
 
