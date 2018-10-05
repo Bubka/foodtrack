@@ -8,10 +8,36 @@
   </a>
 </h1>
 
+
+
 @include('partials.alert_success')
 
 <table class="table table-striped">
   <tbody>
+    <tr>
+      <td colspan="2">
+        <form method="post" action="{{url('food/search')}}">
+          {{ csrf_field() }}
+          <div class="input-group">
+            <input type="text" class="form-control" name="q" aria-describedby="button-searchButton"
+              @if ( null !== Request::input('q') )
+                  value="{{ Request::input('q') }}"
+              @endif
+            >
+            <div class="input-group-append">
+              @if ( null !== Request::input('q') )
+              <a href="{{ route('food.index') }}" class="btn btn-outline-secondary">
+                <i class="fas fa-times-circle fa-fw"></i>
+              </a>
+              @endif
+              <button class="btn btn-outline-secondary" type="submit" id="searchButton">
+                <i class="fas fa-search fa-fw"></i>
+              </button>
+            </div>
+          </div>
+        </form>
+      </td>
+    </tr>
     @foreach ($foods as $food)
     <tr>
       <td>
@@ -26,7 +52,7 @@
           {{ $food['lipid'] }}
         </span>
       </td>
-      <td>
+      <td align="right">
         <form action="{{action('FoodController@destroy', $food->id)}}" method="post">
           {{csrf_field()}}
           <input name="_method" type="hidden" value="DELETE">
@@ -46,5 +72,8 @@
   </tbody>
 </table>
 
-{{ $foods->links() }}
+@if ($showPagination)
+  {{ $foods->links() }}
+@endif
+
 @endsection

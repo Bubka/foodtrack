@@ -17,7 +17,31 @@ class FoodController extends Controller
      */
     public function index()
     {
-        return view('foods.index', ['foods' => Food::paginate(5)]);
+        return view('foods.index', [
+                'foods' => Food::paginate(5),
+                'showPagination' => true
+            ]);
+    }
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function search(Request $request)
+    {
+        if( null !== $request->q ) {
+            return view('foods.index', [
+                'foods' => Food::where("name", "LIKE", "%" . $request->q . "%")->get(),
+                'showPagination' => false
+            ]);
+        }
+        else {
+            return view('foods.index', [
+                'foods' => Food::paginate(5),
+                'showPagination' => true
+            ]);
+        }
     }
 
     /**
