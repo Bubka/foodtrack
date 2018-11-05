@@ -56,6 +56,13 @@
             height: 20px;
             z-index: 400;
         }
+
+        /*hide unwanted navigation links from laravel pagination*/
+        ul.pagination li.page-item:nth-child(7),
+        ul.pagination li.page-item:nth-child(8),
+        ul.pagination li.page-item:nth-child(9) {
+            display: none !important;
+        }
      </style>
 
 </head>
