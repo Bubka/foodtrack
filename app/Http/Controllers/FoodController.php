@@ -7,6 +7,7 @@ use App\Recipe;
 use App\Http\Requests\FoodRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 
 class FoodController extends Controller
 {
@@ -43,6 +44,35 @@ class FoodController extends Controller
             ]);
         }
     }
+
+    /**
+     * Generate and push all food items to a downloadable JSON file
+     * @return [type] [description]
+     */
+    public function export()
+    {
+        $foods = Food::All();
+        $jsonContent = '{';
+
+        foreach ($foods as $index => $food) {
+            $jsonContent .= '
+    "' . $index . '": [
+            { "name": "' . $food->name . '" },
+            { "kcal": "' . $food->kcal . '" },
+            { "protein": "' . $food->protein . '" },
+            { "carb": "' . $food->carb . '" },
+            { "lipid": "' . $food->lipid . '" },
+            { "baseWeight": "' . $food->baseWeight . '" },
+            { "unitWeight": "' . $food->unitWeight . '" }
+        ],';
+        }
+
+        $jsonContent = substr($jsonContent, 0, -1) . '
+}';
+        Storage::put('public/foods_export.json',$jsonContent);
+        return Storage::download('public/foods_export.json', 'foods_export.json', array('Content-Type: application/json'));
+    }
+
 
     /**
      * Show the form for creating a new resource.

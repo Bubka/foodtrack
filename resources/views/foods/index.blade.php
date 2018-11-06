@@ -6,7 +6,7 @@
     <i class="fa fa-ellipsis-v"></i>
   </a>
   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="actionMenu">
-    <a class="dropdown-item" href="#" >Export</a>
+    <a class="dropdown-item" href="{{url('food/export')}}" >Export as JSON</a>
   </div>
 </div>
 <h1>
