@@ -7,6 +7,7 @@
   </a>
   <div class="dropdown-menu dropdown-menu-right" aria-labelledby="actionMenu">
     <a class="dropdown-item" href="{{url('food/export')}}" >Export as JSON</a>
+    <a class="dropdown-item" href="{{url('food/import')}}" >Import JSON</a>
   </div>
 </div>
 <h1>
@@ -17,6 +18,7 @@
 </h1>
 
 @include('partials.alert_success')
+@include('partials.form_error')
 
 <table class="table table-striped">
   <tbody>

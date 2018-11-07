@@ -19,6 +19,7 @@ Route::get('/', function () {
 // Route::get('food/{id}', 'FoodController@show')->name('food.show');
 
 Route::get('food/export', 'FoodController@export');
+Route::get('food/import', 'FoodController@import');
 Route::post('food/search', 'FoodController@search');
 Route::get('food/feed', 'FoodController@feed');
 Route::resource('food', 'FoodController');

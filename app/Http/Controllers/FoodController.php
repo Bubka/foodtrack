@@ -52,24 +52,24 @@ class FoodController extends Controller
     public function export()
     {
         $foods = Food::All();
-        $jsonContent = '{';
+        $jsonFoods = '{';
 
         foreach ($foods as $index => $food) {
-            $jsonContent .= '
-    "' . $index . '": [
-            { "name": "' . $food->name . '" },
-            { "kcal": "' . $food->kcal . '" },
-            { "protein": "' . $food->protein . '" },
-            { "carb": "' . $food->carb . '" },
-            { "lipid": "' . $food->lipid . '" },
-            { "baseWeight": "' . $food->baseWeight . '" },
-            { "unitWeight": "' . $food->unitWeight . '" }
-        ],';
+            $jsonFoods .= '
+    "' . $index . '": {
+            "name": "' . $food->name . '",
+            "kcal": "' . $food->kcal . '",
+            "protein": "' . $food->protein . '",
+            "carb": "' . $food->carb . '",
+            "lipid": "' . $food->lipid . '" ,
+            "baseWeight": "' . $food->baseWeight . '",
+            "unitWeight": "' . $food->unitWeight . '"
+        },';
         }
 
-        $jsonContent = substr($jsonContent, 0, -1) . '
+        $jsonFoods = substr($jsonFoods, 0, -1) . '
 }';
-        Storage::put('public/foods_export.json',$jsonContent);
+        Storage::put('public/foods_export.json',$jsonFoods);
         return Storage::download('public/foods_export.json', 'foods_export.json', array('Content-Type: application/json'));
     }
 
@@ -166,6 +166,83 @@ class FoodController extends Controller
         $food->delete();
 
         return redirect('food')->with('success','The food has been deleted');
+    }
+
+
+    /**
+     * Import the foods_export.json file that exists in the storage/app/public/ folder
+     *
+     * @return [type] [description]
+     */
+    public function import()
+    {
+        if( Storage::exists('public/foods_export.json')) {
+            $jsonFoods = json_decode(Storage::get('public/foods_export.json'), true);
+
+            $foods = Food::All();
+            $newFoodCount = 0;
+            $updatedFoodCount = 0;
+
+            foreach ($jsonFoods as $jsonFood) {
+
+                $food = $foods->whereIn('name', $jsonFood['name'])->first();
+
+                if( $food) {
+                    // A food exists in db with the same name, we compare its other properties
+                    $foodArray = $food->toArray();
+
+                    unset($foodArray['id']);
+                    unset($foodArray['created_at']);
+                    unset($foodArray['updated_at']);
+
+                    $diff = array_diff_assoc($foodArray, $jsonFood);
+
+                    if($diff) {
+                        // we update the food properties
+                        $food->kcal = $jsonFood['kcal'];
+                        $food->protein = $jsonFood['protein'];
+                        $food->carb = $jsonFood['carb'];
+                        $food->lipid = $jsonFood['lipid'];
+                        $food->baseWeight = $jsonFood['baseWeight'];
+                        $food->save();
+                        $updatedFoodCount += 1;
+                    }
+                }
+                else {
+                    // The imported food do not exists in db, we create it
+                    $newFood = new Food;
+
+                    $newFood->name = $jsonFood['name'];
+                    $newFood->kcal = $jsonFood['kcal'];
+                    $newFood->protein = $jsonFood['protein'];
+                    $newFood->carb = $jsonFood['carb'];
+                    $newFood->lipid = $jsonFood['lipid'];
+                    $newFood->baseWeight = $jsonFood['baseWeight'];
+
+                    if( isset($jsonFood['unitWeight']) )
+                    {
+                        $newFood->unitWeight = $jsonFood['unitWeight'];
+                    }
+
+                    $newFood->save();
+                    unset($newFood);
+                    $newFoodCount += 1;
+                }
+            }
+
+            if( $updatedFoodCount > 0 OR $newFoodCount > 0) {
+                return redirect('food')->with ('success', "JSON file successfully imported :
+                                               " . $newFoodCount . " food(s) added,
+                                               " . $updatedFoodCount . " food(s) updated");
+            }
+            else {
+                return redirect('food')->with ('success', 'Nothing to add or update');
+            }
+        }
+        else {
+            return redirect('food')->withErrors ('No JSON file to import');
+        }
+
     }
 
 
