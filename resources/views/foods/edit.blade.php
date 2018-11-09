@@ -4,8 +4,8 @@
 
     <h2>Edit <b>{{ $food->name }}</b></h2><br  />
 
-    
-    @include('partials.form_error')
+
+    @include('partials.alerts')
 
     <form method="post" action="{{action('FoodController@update', $id)}}">
         {{csrf_field()}}

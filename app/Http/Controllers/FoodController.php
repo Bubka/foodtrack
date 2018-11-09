@@ -240,7 +240,7 @@ class FoodController extends Controller
             }
         }
         else {
-            return redirect('food')->withErrors ('No JSON file to import');
+            return redirect('food')->with ('error', 'No JSON file to import');
         }
 
     }

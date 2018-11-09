@@ -3,8 +3,8 @@
 @section('content')
 
     <h2>Edit intake for <b>{{ $intake->meal }} on {{ $intake->ate_on }}</b></h2><br />
-    
-    @include('partials.form_error')
+
+    @include('partials.alerts')
 
     <form method="post" action="{{action('IntakeController@update', $id)}}">
         {{csrf_field()}}
@@ -54,7 +54,7 @@
                 <input type="text" class="form-control" name="number" value="{{$intake->number}}" placeholder="unit">
             </div>
         </div>
-        
+
         <div class="col-8 mx-auto pt-4" style="text-align: center;">
             <button type="submit" class="btn btn-primary btn-block">Update Intake</button>
         </div>

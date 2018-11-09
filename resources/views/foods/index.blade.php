@@ -17,8 +17,7 @@
   </a>
 </h1>
 
-@include('partials.alert_success')
-@include('partials.form_error')
+@include('partials.alerts')
 
 <table class="table table-striped">
   <tbody>

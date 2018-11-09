@@ -124,7 +124,7 @@ class IntakeController extends Controller
 
         if(!array_key_exists($request->meal, $meals))
         {
-            return redirect('intake/daily/' . $days['intakeDate']->format('Y-m-d'))->withErrors('The meal you want to reuse do not exists');
+            return redirect('intake/daily/' . $days['intakeDate']->format('Y-m-d'))->with('error', 'The meal you want to reuse do not exists');
         }
 
         $reusedMealIntakes = Intake::with('food')->where( 'meal', '=', $request->meal )
@@ -155,7 +155,7 @@ class IntakeController extends Controller
         }
         else
         {
-            return redirect('intake/daily/' . $days['intakeDate']->format('Y-m-d'))->withErrors('The meal you want to reuse is empty');
+            return redirect('intake/daily/' . $days['intakeDate']->format('Y-m-d'))->with('error', 'The meal you want to reuse is empty');
         }
     }
 
@@ -223,7 +223,7 @@ class IntakeController extends Controller
         {
             if( !isset($food->unitWeight))
             {
-                return back()->withErrors('This food does not have unit weight');
+                return back()->with('error', 'This food does not have unit weight');
             }
             else $ateWeight = $request->number * $food->unitWeight;
         }

@@ -4,8 +4,8 @@
 
     <h1>Edit recipe</h1><br  />
 
-    
-    @include('partials.form_error')
+
+    @include('partials.alerts')
 
     <form method="post" action="{{action('RecipeController@update', $recipe->id)}}">
         {{csrf_field()}}

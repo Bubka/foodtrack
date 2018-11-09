@@ -4,8 +4,7 @@
 
     <h1>New food</h1><br />
 
-    @include('partials.form_error')
-    @include('partials.alert_success')
+    @include('partials.alerts')
 
     <form method="post" action="{{url('food')}}">
     {{csrf_field()}}

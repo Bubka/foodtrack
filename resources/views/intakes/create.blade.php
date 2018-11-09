@@ -4,12 +4,11 @@
 
     <h1>New intake</h1><br />
 
-    @include('partials.form_error')
-    @include('partials.alert_success')
+    @include('partials.alerts')
 
     <form method="post" action="{{url('intake')}}">
         {{ csrf_field() }}
-        
+
 
         <div class="form-group">
             <label for="food">Food</label>
@@ -48,7 +47,7 @@
             <button type="submit" class="btn btn-primary btn-block">Add intake</button>
         </div>
 
-    
+
     </form>
 
     <script type="text/javascript">

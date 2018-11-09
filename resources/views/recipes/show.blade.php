@@ -18,8 +18,7 @@
     @endif
     <br />
 
-    @include('partials.form_error')
-    @include('partials.alert_success')
+    @include('partials.alerts')
 
     <h4>Ingredients
         <a class="text-body" href="#modalNewIngredient" data-toggle="modal" data-target="#modalNewIngredient" >
@@ -92,7 +91,7 @@
                 <form id="addIngredientForm" method="post" action="{{ url('recipe/add') }}">
                     {{ csrf_field() }}
                     <input type="hidden" name="recipeId" value="{{ $recipe->id }}" />
-                    
+
                     <div class="row">
                         <div class="form-group col-md-6">
                             <label for="food">Food</label>

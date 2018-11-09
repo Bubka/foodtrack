@@ -48,8 +48,7 @@
         </div>
     </div>
 
-    @include('partials.alert_success')
-    @include('partials.form_error')
+    @include('partials.alerts')
 
     <br />
 
