@@ -28,20 +28,10 @@ class IntakeController extends Controller
      */
     public function daily(Request $request)
     {
-        // Define intake date : today or the one provided in querystring
-        if($request->day)
-        {
-            $intakeDate = Carbon::createFromFormat('Y-m-d', $request->day);
-            $prevDay = Carbon::createFromFormat('Y-m-d', $request->day)->subDays(1)->format('Y-m-d');
-            $nextDay = Carbon::createFromFormat('Y-m-d', $request->day)->addDays(1)->format('Y-m-d');
-        }
-        else {
-            $intakeDate = Carbon::now();
-            $prevDay = Carbon::yesterday()->format('Y-m-d');
-            $nextDay = Carbon::tomorrow()->format('Y-m-d');
-        }
+        // Define intake dates : today or the one provided in querystring plus previous and next dates
+        $days = $this->getPrevCurrentNextDays($request->day);
 
-        $intakes = Intake::with('food')->whereDate('ate_on', '=', $intakeDate->toDateString())->get();
+        $intakes = Intake::with('food')->whereDate('ate_on', '=', $days['intakeDate']->toDateString())->get();
 
         $objective['kcal'] = 2200;
         $objective['protein'] = 140;
@@ -109,10 +99,64 @@ class IntakeController extends Controller
                                         'afternoonsnackIntakes' => $afternoonsnackIntakes,
                                         'eveningSnackIntakes' => $eveningSnackIntakes,
                                         'dinerIntakes' => $dinerIntakes,
-                                        'intakeDate' => $intakeDate,
-                                        'prevDay' => $prevDay,
-                                        'nextDay' => $nextDay ]);
+                                        'intakeDate' => $days['intakeDate'],
+                                        'prevDay' => $days['prevDay'],
+                                        'nextDay' => $days['nextDay']
+                                    ]);
 
+    }
+
+
+    /**
+     * reuse yesterday's meal
+     *
+     * @param  \App\Http\Requests\IntakeRequest  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function reuseMeal(Request $request)
+    {
+
+        // get intakes dates
+        $days = $this->getPrevCurrentNextDays($request->day);
+
+        // check meal name to reuse
+        $meals = $this->meals();
+
+        if(!array_key_exists($request->meal, $meals))
+        {
+            return redirect('intake/daily/' . $days['intakeDate']->format('Y-m-d'))->withErrors('The meal you want to reuse do not exists');
+        }
+
+        $reusedMealIntakes = Intake::with('food')->where( 'meal', '=', $request->meal )
+                                    ->whereDate('ate_on', '=', $days['prevDay']
+                                    ->toDateString())
+                                    ->get();
+
+        if($reusedMealIntakes->count() > 0)
+        {
+            foreach($reusedMealIntakes as $reuseMealIntake)
+            {
+                $intake = new Intake;
+
+                $intake->food_id = $reuseMealIntake->food_id;
+                $intake->ate_on = $days['intakeDate']->format('Y-m-d');
+                $intake->meal = $request->meal;
+                $intake->kcal = $reuseMealIntake->kcal;
+                $intake->protein = $reuseMealIntake->protein;
+                $intake->carb = $reuseMealIntake->carb;
+                $intake->lipid = $reuseMealIntake->lipid;
+                $intake->weight = $reuseMealIntake->weight;
+                $intake->number = $reuseMealIntake->number;
+
+                $intake->save();
+            }
+
+            return redirect('intake/daily/' . $days['intakeDate']->format('Y-m-d'))->with('success', 'Meal successfully reused');
+        }
+        else
+        {
+            return redirect('intake/daily/' . $days['intakeDate']->format('Y-m-d'))->withErrors('The meal you want to reuse is empty');
+        }
     }
 
 
@@ -179,7 +223,7 @@ class IntakeController extends Controller
         {
             if( !isset($food->unitWeight))
             {
-                return back()->with('error', 'This food does not have unit weight');
+                return back()->withErrors('This food does not have unit weight');
             }
             else $ateWeight = $request->number * $food->unitWeight;
         }
@@ -284,6 +328,12 @@ class IntakeController extends Controller
         return back()->with('success', 'Intake has been deleted');
     }
 
+
+    /**
+     * get meals list with their time
+     *
+     * @return array
+     */
     protected function meals()
     {
         return [
@@ -294,6 +344,30 @@ class IntakeController extends Controller
             'diner' => '19h',
             'eveningsnack' => '22h'
         ];
+    }
+
+
+    /**
+     * Get yesterday, now and tomorrow relative dates
+     *
+     * @param  String|null $day [optional: a date to use as referential]
+     * @return array           an array of dates
+     */
+    protected function getPrevCurrentNextDays(String $day = null)
+    {
+        if($day)
+        {
+            $days['intakeDate']= Carbon::createFromFormat('Y-m-d', $day);
+            $days['prevDay'] = Carbon::createFromFormat('Y-m-d', $day)->subDays(1);
+            $days['nextDay'] = Carbon::createFromFormat('Y-m-d', $day)->addDays(1);
+        }
+        else {
+            $days['intakeDate'] = Carbon::now();
+            $days['prevDay'] = Carbon::yesterday();
+            $days['nextDay'] = Carbon::tomorrow();
+        }
+
+        return $days;
     }
 
     protected function calculateNitrument(Food $food)

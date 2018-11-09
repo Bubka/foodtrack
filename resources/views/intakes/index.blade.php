@@ -1,6 +1,19 @@
 @extends('masterpage')
 
 @section('content')
+    <div class="dropdown float-right">
+      <a class="btn btn-light " href="#" role="button" id="actionMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="actionMenu">
+        <a class="dropdown-item" href="{{url('food/export')}}" >Reuse last breakfast</a>
+        <a class="dropdown-item" href="{{url('food/import')}}" >Reuse last morning snack</a>
+        <a class="dropdown-item" href="{{url('food/import')}}" >Reuse last lunch</a>
+        <a class="dropdown-item" href="{{url('food/import')}}" >Reuse last afternoon snack</a>
+        <a class="dropdown-item" href="{{url('food/import')}}" >Reuse last diner</a>
+        <a class="dropdown-item" href="{{url('food/import')}}" >Reuse last evening snack</a>
+      </div>
+    </div>
     <h1>
         Intakes
         <a href="{{ route('intake.create') }}" class="text-dark">
@@ -39,7 +52,7 @@
                     <div class="btn-group" role="group">
                       {{-- <a href="{{action('IntakeController@edit', $intake->id)}}" class="btn btn-sm btn-outline-secondary">Edit</a>
                       <button class="btn btn-outline-secondary btn-sm" type="submit">Del.</button> --}}
-                      
+
                       <a href="{{action('IntakeController@edit', $intake->id)}}" class="btn btn-sm btn-outline-secondary">
                           <i class="far fa-edit"></i>
                       </a>

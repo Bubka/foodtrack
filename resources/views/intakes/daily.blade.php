@@ -1,6 +1,20 @@
 @extends('masterpage')
 
 @section('content')
+    <div class="dropdown float-right">
+      <a class="btn btn-light " href="#" role="button" id="actionMenu" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <i class="fa fa-ellipsis-v"></i>
+      </a>
+      <div class="dropdown-menu dropdown-menu-right" aria-labelledby="actionMenu">
+        <h6 class="dropdown-header">Reuse last</h6>
+        <a class="dropdown-item" href="{{url('intake/reuse/breakfast/' . $intakeDate->format('Y-m-d'))}}" >Breakfast</a>
+        <a class="dropdown-item" href="{{url('intake/reuse/morningsnack/' . $intakeDate->format('Y-m-d'))}}" >Morning snack</a>
+        <a class="dropdown-item" href="{{url('intake/reuse/lunch/' . $intakeDate->format('Y-m-d'))}}" >Lunch</a>
+        <a class="dropdown-item" href="{{url('intake/reuse/afternoonsnack/' . $intakeDate->format('Y-m-d'))}}" >Afternoon snack</a>
+        <a class="dropdown-item" href="{{url('intake/reuse/diner/' . $intakeDate->format('Y-m-d'))}}" >Diner</a>
+        <a class="dropdown-item" href="{{url('intake/reuse/eveningsnack/' . $intakeDate->format('Y-m-d'))}}" >Evening snack</a>
+      </div>
+    </div>
     <h1 class="mb-4">Daily intakes</h1>
     <a name="breakfast"></a>
     <h6>Energy: <span class="text-monospace">{{ $intakes->sum('kcal') }}kcal</span></h6>
@@ -35,6 +49,7 @@
     </div>
 
     @include('partials.alert_success')
+    @include('partials.form_error')
 
     <br />
 

@@ -27,7 +27,7 @@ Route::resource('food', 'FoodController');
 // Route::get('intake', 'IntakeController@index')->name('intake.index');
 // Route::get('intake/{id}', 'IntakeController@show')->name('intake.show');
 route::get('intake/daily/{day?}', 'IntakeController@daily')->name('intake.daily');
-
+Route::get('intake/reuse/{meal?}/{day?}', 'IntakeController@reuseMeal');
 Route::post('intake/addRecipe', 'IntakeController@addRecipe');
 Route::resource('intake', 'IntakeController');
 
