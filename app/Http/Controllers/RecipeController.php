@@ -32,13 +32,24 @@ class RecipeController extends Controller
 
 
     /**
+     * Show the form for creating a new recipe from any existing meal
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function createFrom(Request $request)
+    {
+        return view('recipes.create');
+    }
+
+
+    /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
-    { 
+    {
         $recipe = new Recipe;
 
         $recipe->name = $request->name;
@@ -93,7 +104,7 @@ class RecipeController extends Controller
     public function edit($id)
     {
         $recipe = Recipe::findOrFail($id);
-        
+
         return view('recipes.edit',compact('recipe'));
     }
 
@@ -108,11 +119,11 @@ class RecipeController extends Controller
     public function update(Request $request, $id)
     {
         $recipe = Recipe::findOrFail($id);
-        
+
         $recipe->name = $request->name;
         //$this->refreshRecipe($recipe);
         $recipe->save();
-        
+
         return redirect('recipe')->with('success', $recipe->name . ' has been updated');
     }
 
@@ -134,7 +145,7 @@ class RecipeController extends Controller
 
         $recipe = $recipe->fresh();
         $recipe->refreshRecipe();
-       
+
         return redirect()->route('recipe.show', ['id' => $recipe->id])->with('success', $newFood->name . ' has been added to recipe' . $recipe->name);
     }
 
@@ -156,7 +167,7 @@ class RecipeController extends Controller
 
         $recipe = $recipe->fresh();
         $recipe->refreshRecipe();
-        
+
         return redirect()->route('recipe.show', ['id' => $recipe->id])->with('success', $food->name . ' has been removed from recipe' . $recipe->name);
     }
 
@@ -172,7 +183,7 @@ class RecipeController extends Controller
         $recipe = Recipe::findOrFail($id);
         $recipe->foods()->detach();
         $recipe->delete();
-        
+
         return redirect('recipe')->with('success', $recipe->name . ' has been deleted');
     }
 

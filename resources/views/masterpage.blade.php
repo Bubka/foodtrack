@@ -67,7 +67,7 @@
 
 </head>
 <body>
-    @isset($intakeDate)
+    @isset($days['intakeDate'])
         @include('partials.header')
     @endisset
     <main role="main" class="container" style="padding-bottom: 70px;">

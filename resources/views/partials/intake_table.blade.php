@@ -32,7 +32,7 @@
                 <span class="text-monospace text-muted float-right">
                     {{ $intakes->sum('protein') }} - {{ $intakes->sum('carb') }} - {{ $intakes->sum('lipid') }}
                 </span>
-                <a name="{{ $meal }}"></a>
+                <a name="{{ $mealAnchor }}"></a>
             </td>
         </tr>
     </tfoot>

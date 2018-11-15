@@ -27,7 +27,7 @@ Route::resource('food', 'FoodController');
 // Route::get('intake', 'IntakeController@index')->name('intake.index');
 // Route::get('intake/{id}', 'IntakeController@show')->name('intake.show');
 route::get('intake/daily/{day?}', 'IntakeController@daily')->name('intake.daily');
-Route::get('intake/reuse/{meal?}/{day?}', 'IntakeController@reuseMeal');
+Route::get('intake/import/{sourceDay?}/{meal?}/on/{targetDay?}', 'IntakeController@importMeal');
 Route::post('intake/addRecipe', 'IntakeController@addRecipe');
 Route::resource('intake', 'IntakeController');
 
@@ -36,6 +36,7 @@ Route::get('suggest/recipe', 'SearchController@suggestRecipe');
 
 
 Route::get('recipe/refresh/{id}', 'RecipeController@refresh');
+Route::get('recipe/from/{day?}/{meal?}', 'RecipeController@createFrom');
 Route::post('recipe/add', 'RecipeController@addFood');
 Route::post('recipe/remove', 'RecipeController@removeFood');
 Route::resource('recipe', 'RecipeController');

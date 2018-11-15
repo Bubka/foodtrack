@@ -6,13 +6,13 @@
         <i class="fa fa-ellipsis-v"></i>
       </a>
       <div class="dropdown-menu dropdown-menu-right" aria-labelledby="actionMenu">
-        <h6 class="dropdown-header">Reuse last</h6>
-        <a class="dropdown-item" href="{{url('intake/reuse/breakfast/' . $intakeDate->format('Y-m-d'))}}" >Breakfast</a>
-        <a class="dropdown-item" href="{{url('intake/reuse/morningsnack/' . $intakeDate->format('Y-m-d'))}}" >Morning snack</a>
-        <a class="dropdown-item" href="{{url('intake/reuse/lunch/' . $intakeDate->format('Y-m-d'))}}" >Lunch</a>
-        <a class="dropdown-item" href="{{url('intake/reuse/afternoonsnack/' . $intakeDate->format('Y-m-d'))}}" >Afternoon snack</a>
-        <a class="dropdown-item" href="{{url('intake/reuse/diner/' . $intakeDate->format('Y-m-d'))}}" >Diner</a>
-        <a class="dropdown-item" href="{{url('intake/reuse/eveningsnack/' . $intakeDate->format('Y-m-d'))}}" >Evening snack</a>
+        <h6 class="dropdown-header">Import {{$days['prevDay']->format('Y-m-d')}}'s</h6>
+        <a class="dropdown-item" href="{{url('intake/import/' . $days['prevDay']->format('Y-m-d') . '/breakfast/on/' . $days['intakeDate']->format('Y-m-d'))}}" >Breakfast</a>
+        <a class="dropdown-item" href="{{url('intake/import/' . $days['prevDay']->format('Y-m-d') . '/morningsnack/on/' . $days['intakeDate']->format('Y-m-d'))}}" >Morning snack</a>
+        <a class="dropdown-item" href="{{url('intake/import/' . $days['prevDay']->format('Y-m-d') . '/lunch/on/' . $days['intakeDate']->format('Y-m-d'))}}" >Lunch</a>
+        <a class="dropdown-item" href="{{url('intake/import/' . $days['prevDay']->format('Y-m-d') . '/afternoonsnack/on/' . $days['intakeDate']->format('Y-m-d'))}}" >Afternoon snack</a>
+        <a class="dropdown-item" href="{{url('intake/import/' . $days['prevDay']->format('Y-m-d') . '/diner/on/' . $days['intakeDate']->format('Y-m-d'))}}" >Diner</a>
+        <a class="dropdown-item" href="{{url('intake/import/' . $days['prevDay']->format('Y-m-d') . '/eveningsnack/on/' . $days['intakeDate']->format('Y-m-d'))}}" >Evening snack</a>
       </div>
     </div>
     <h1 class="mb-4">Daily intakes</h1>
@@ -52,15 +52,17 @@
 
     <br />
 
-    <h3>Breakfast
+    <h3>
+        Breakfast
         <a class="text-body" href="#modalNewIntake" data-toggle="modal" data-target="#modalNewIntake" data-whatever="breakfast">
             <i class="fas fa-plus-square fa-sm fa-fw"></i>
         </a>
     @if (count($breakfastIntakes) > 0)
-        <small class="float-right">{{ $breakfastIntakes->sum('kcal') }} kcal</small></h3>
-        @include('partials.intake_table', array('intakes' => $breakfastIntakes, 'meal' => 'morningsnack'))
+        @include('partials.meal_action_menu', array('intakes' => $breakfastIntakes, 'meal' => 'breakfast'))
+    </h3>
+    @include('partials.intake_table', array('intakes' => $breakfastIntakes, 'mealAnchor' => 'morningsnack'))
     @else
-        </h3>
+    </h3>
         <a name="morningsnack"></a>
         <div class="mb-4 text-secondary">no intake here</div>
     @endif
@@ -70,8 +72,9 @@
             <i class="fas fa-plus-square fa-sm fa-fw"></i>
         </a>
     @if (count($morningSnackIntakes) > 0)
-        <small class="float-right">{{ $morningSnackIntakes->sum('kcal') }} kcal</small></h3>
-        @include('partials.intake_table', array('intakes' => $morningSnackIntakes, 'meal' => 'lunch'))
+        @include('partials.meal_action_menu', array('intakes' => $morningSnackIntakes, 'meal' => 'morningsnack'))
+        </h3>
+        @include('partials.intake_table', array('intakes' => $morningSnackIntakes, 'mealAnchor' => 'lunch'))
     @else
         </h3>
         <a name="lunch"></a>
@@ -83,8 +86,9 @@
             <i class="fas fa-plus-square fa-sm fa-fw"></i>
         </a>
     @if (count($lunchIntakes) > 0)
-        <small class="float-right">{{ $lunchIntakes->sum('kcal') }} kcal</small></h3>
-        @include('partials.intake_table', array('intakes' => $lunchIntakes, 'meal' => 'afternoonsnack'))
+        @include('partials.meal_action_menu', array('intakes' => $lunchIntakes, 'meal' => 'lunch'))
+        </h3>
+        @include('partials.intake_table', array('intakes' => $lunchIntakes, 'mealAnchor' => 'afternoonsnack'))
     @else
         </h3>
         <a name="afternoonsnack"></a>
@@ -96,8 +100,9 @@
             <i class="fas fa-plus-square fa-sm fa-fw"></i>
         </a>
     @if (count($afternoonsnackIntakes) > 0)
-        <small class="float-right">{{ $afternoonsnackIntakes->sum('kcal') }} kcal</small></h3>
-        @include('partials.intake_table', array('intakes' => $afternoonsnackIntakes, 'meal' => 'diner'))
+        @include('partials.meal_action_menu', array('intakes' => $afternoonsnackIntakes, 'meal' => 'afternoonsnack'))
+        </h3>
+        @include('partials.intake_table', array('intakes' => $afternoonsnackIntakes, 'mealAnchor' => 'diner'))
     @else
         </h3>
         <a name="diner"></a>
@@ -109,8 +114,9 @@
             <i class="fas fa-plus-square fa-sm fa-fw"></i>
         </a>
     @if (count($dinerIntakes) > 0)
-        <small class="float-right">{{ $dinerIntakes->sum('kcal') }} kcal</small></h3>
-        @include('partials.intake_table', array('intakes' => $dinerIntakes, 'meal' => 'eveningsnack'))
+        @include('partials.meal_action_menu', array('intakes' => $dinerIntakes, 'meal' => 'diner'))
+        </h3>
+        @include('partials.intake_table', array('intakes' => $dinerIntakes, 'mealAnchor' => 'eveningsnack'))
     @else
         </h3>
         <a name="eveningsnack"></a>
@@ -122,8 +128,9 @@
             <i class="fas fa-plus-square fa-sm fa-fw"></i>
         </a>
     @if (count($eveningSnackIntakes) > 0)
-        <small class="float-right">{{ $eveningSnackIntakes->sum('kcal') }} kcal</small></h3>
-        @include('partials.intake_table', array('intakes' => $eveningSnackIntakes, 'meal' => 'eveningsnack'))
+        @include('partials.meal_action_menu', array('intakes' => $eveningSnackIntakes, 'meal' => 'eveningsnack'))
+        </h3>
+        @include('partials.intake_table', array('intakes' => $eveningSnackIntakes, 'mealAnchor' => 'eveningsnack'))
     @else
         </h3><div class="mb-4 text-secondary">no intake here</div>
     @endif
@@ -153,7 +160,7 @@
                     <form id="addFoodForm" method="post" action="{{url('intake')}}">
                         {{ csrf_field() }}
                         <input type="hidden" name="meal" class="meal-name"/>
-                        <input type="hidden" name="ate_on" value="{{ $intakeDate->format('Y-m-d') }}" />
+                        <input type="hidden" name="ate_on" value="{{ $days['intakeDate']->format('Y-m-d') }}" />
                         <div class="form-group">
                             <label for="food">Food</label>
                             <br />
@@ -178,7 +185,7 @@
                     <form id="addRecipeForm" method="post" action="{{url('intake/addRecipe')}}">
                         {{ csrf_field() }}
                         <input type="hidden" name="mealName" class="meal-name"/>
-                        <input type="hidden" name="intakeDate" value="{{ $intakeDate->format('Y-m-d') }}" />
+                        <input type="hidden" name="intakeDate" value="{{ $days['intakeDate']->format('Y-m-d') }}" />
                         <div class="form-group">
                             <label for="recipe">Recipe</label>
                             <br />

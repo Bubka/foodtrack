@@ -99,63 +99,64 @@ class IntakeController extends Controller
                                         'afternoonsnackIntakes' => $afternoonsnackIntakes,
                                         'eveningSnackIntakes' => $eveningSnackIntakes,
                                         'dinerIntakes' => $dinerIntakes,
-                                        'intakeDate' => $days['intakeDate'],
-                                        'prevDay' => $days['prevDay'],
-                                        'nextDay' => $days['nextDay']
+                                        'days' => $days
                                     ]);
 
     }
 
 
     /**
-     * reuse yesterday's meal
+     * import meal from source to target day
      *
      * @param  \App\Http\Requests\IntakeRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function reuseMeal(Request $request)
+    public function importMeal(Request $request)
     {
 
         // get intakes dates
         $days = $this->getPrevCurrentNextDays($request->day);
 
-        // check meal name to reuse
+        $days['sourceDay'] = Carbon::createFromFormat('Y-m-d', $request->sourceDay);
+        $days['targetDay'] = Carbon::createFromFormat('Y-m-d', $request->targetDay);
+
+        // check meal name to import
         $meals = $this->meals();
 
         if(!array_key_exists($request->meal, $meals))
         {
-            return redirect('intake/daily/' . $days['intakeDate']->format('Y-m-d'))->with('error', 'The meal you want to reuse do not exists');
+            return back()->with('error', 'The meal you want to import do not exists');
         }
 
-        $reusedMealIntakes = Intake::with('food')->where( 'meal', '=', $request->meal )
-                                    ->whereDate('ate_on', '=', $days['prevDay']
+        $importedMealIntakes = Intake::with('food')->where( 'meal', '=', $request->meal )
+                                    ->whereDate('ate_on', '=', $days['sourceDay']
                                     ->toDateString())
                                     ->get();
 
-        if($reusedMealIntakes->count() > 0)
+        if($importedMealIntakes->count() > 0)
         {
-            foreach($reusedMealIntakes as $reuseMealIntake)
+            foreach($importedMealIntakes as $importedMealIntake)
             {
                 $intake = new Intake;
 
-                $intake->food_id = $reuseMealIntake->food_id;
-                $intake->ate_on = $days['intakeDate']->format('Y-m-d');
+                $intake->food_id = $importedMealIntake->food_id;
+                $intake->ate_on = $days['targetDay']->format('Y-m-d');
                 $intake->meal = $request->meal;
-                $intake->kcal = $reuseMealIntake->kcal;
-                $intake->protein = $reuseMealIntake->protein;
-                $intake->carb = $reuseMealIntake->carb;
-                $intake->lipid = $reuseMealIntake->lipid;
-                $intake->weight = $reuseMealIntake->weight;
-                $intake->number = $reuseMealIntake->number;
+                $intake->kcal = $importedMealIntake->kcal;
+                $intake->protein = $importedMealIntake->protein;
+                $intake->carb = $importedMealIntake->carb;
+                $intake->lipid = $importedMealIntake->lipid;
+                $intake->weight = $importedMealIntake->weight;
+                $intake->number = $importedMealIntake->number;
 
                 $intake->save();
             }
 
-            return redirect('intake/daily/' . $days['intakeDate']->format('Y-m-d'))->with('success', 'Meal successfully reused');
+            return back()->with('success', 'Meal successfully imported');
         }
         else
         {
-            return redirect('intake/daily/' . $days['intakeDate']->format('Y-m-d'))->with('error', 'The meal you want to reuse is empty');
+            return back()->with('error', 'The meal you want to import is empty');
         }
     }
 
@@ -366,6 +367,8 @@ class IntakeController extends Controller
             $days['prevDay'] = Carbon::yesterday();
             $days['nextDay'] = Carbon::tomorrow();
         }
+
+        $days['today'] = Carbon::now();
 
         return $days;
     }
