@@ -28,7 +28,7 @@ class IntakeRequest extends FormRequest
             'food_id' => 'exists:foods,id',
             'meal' => 'required',
             'weight' => 'required_without:number|numeric|nullable',
-            'number' => 'required_without:weight|integer|nullable',
+            'number' => 'required_without:weight|numeric|nullable',
         ];
     }
 }
