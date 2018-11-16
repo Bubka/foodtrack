@@ -160,6 +160,12 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+
+        /*
+         * FoodTrack Service Providers...
+         */
+        'App\Providers\HelperServiceProvider',
+
     ],
 
     /*

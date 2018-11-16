@@ -29,7 +29,7 @@ class IntakeController extends Controller
     public function daily(Request $request)
     {
         // Define intake dates : today or the one provided in querystring plus previous and next dates
-        $days = $this->getPrevCurrentNextDays($request->day);
+        $days = getPrevCurrentNextDays($request->day);
 
         $intakes = Intake::with('food')->whereDate('ate_on', '=', $days['intakeDate']->toDateString())->get();
 
@@ -115,7 +115,7 @@ class IntakeController extends Controller
     {
 
         // get intakes dates
-        $days = $this->getPrevCurrentNextDays($request->day);
+        $days = getPrevCurrentNextDays($request->day);
 
         $days['sourceDay'] = Carbon::createFromFormat('Y-m-d', $request->sourceDay);
         $days['targetDay'] = Carbon::createFromFormat('Y-m-d', $request->targetDay);
@@ -347,31 +347,6 @@ class IntakeController extends Controller
         ];
     }
 
-
-    /**
-     * Get yesterday, now and tomorrow relative dates
-     *
-     * @param  String|null $day [optional: a date to use as referential]
-     * @return array           an array of dates
-     */
-    protected function getPrevCurrentNextDays(String $day = null)
-    {
-        if($day)
-        {
-            $days['intakeDate']= Carbon::createFromFormat('Y-m-d', $day);
-            $days['prevDay'] = Carbon::createFromFormat('Y-m-d', $day)->subDays(1);
-            $days['nextDay'] = Carbon::createFromFormat('Y-m-d', $day)->addDays(1);
-        }
-        else {
-            $days['intakeDate'] = Carbon::now();
-            $days['prevDay'] = Carbon::yesterday();
-            $days['nextDay'] = Carbon::tomorrow();
-        }
-
-        $days['today'] = Carbon::now();
-
-        return $days;
-    }
 
     protected function calculateNitrument(Food $food)
     {
