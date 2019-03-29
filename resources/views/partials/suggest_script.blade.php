@@ -9,7 +9,7 @@
                 wildcard: '%QUERY%'
             },
         });
-        
+
         $('#food').typeahead({
             hint: true,
             highlight: true,
@@ -17,9 +17,10 @@
         }, {
             // this is append to form the class name of the suggestion menu
             name: 'foodSuggestions',
+            limit: 30,
             source: bloodhound,
             display: function(data) {
-                return data.name  //Input value to be set when you select a suggestion. 
+                return data.name  //Input value to be set when you select a suggestion.
             },
             templates: {
                 empty: [
@@ -29,7 +30,7 @@
                     '<div class="list-group search-results-dropdown">'
                 ],
                 suggestion: function(data) {
-                    return '<div style="font-weight:normal; margin-top:-10px ! important;" class="list-group-item">'
+                    return '<div style="font-weight:normal; " class="list-group-item">'
                                 + data.name + '<span class="small text-secondary" style="margin-left:5px">' + data.kcal + ' : ' + data.protein + ' / '
                                 + data.carb + ' / ' + data.lipid + '</span></div></div>'
                 }
@@ -48,7 +49,7 @@
                 wildcard: '%QUERY%'
             },
         });
-        
+
         $('#recipe').typeahead({
             hint: true,
             highlight: true,
@@ -56,9 +57,10 @@
         }, {
             // this is append to form the class name of the suggestion menu
             name: 'recipeSuggestions',
+            limit: 30,
             source: bloodhoundForRecipe,
             display: function(data) {
-                return data.name  //Input value to be set when you select a suggestion. 
+                return data.name  //Input value to be set when you select a suggestion.
             },
             templates: {
                 empty: [
