@@ -33,7 +33,7 @@ class IntakeController extends Controller
 
         $intakes = Intake::with('food')->whereDate('ate_on', '=', $days['intakeDate']->toDateString())->get();
 
-        $objective['kcal'] = 2400;
+        $objective['kcal'] = 2500;
         $objective['protein'] = 140;
         $objective['lipid'] = 70;
 
