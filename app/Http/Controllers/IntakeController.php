@@ -33,7 +33,7 @@ class IntakeController extends Controller
 
         $intakes = Intake::with('food')->whereDate('ate_on', '=', $days['intakeDate']->toDateString())->get();
 
-        $objective['kcal'] = 2200;
+        $objective['kcal'] = 2400;
         $objective['protein'] = 140;
         $objective['lipid'] = 70;
 
@@ -345,11 +345,5 @@ class IntakeController extends Controller
             'diner' => '19h',
             'eveningsnack' => '22h'
         ];
-    }
-
-
-    protected function calculateNitrument(Food $food)
-    {
-
     }
 }
